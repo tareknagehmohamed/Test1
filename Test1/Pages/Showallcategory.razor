@@ -1,0 +1,83 @@
+﻿@page "/showallcategory"
+@using Test1.Models;
+@inject IJSRuntime js
+@*
+<EditForm Model="category" OnValidSubmit="Create">
+    <InputText id="Name" @bind-Value="category.Name"></InputText>
+    @if (message!="")
+    {
+        <div class="alert alert-danger"> <h1>@message</h1></div>
+    }
+    
+    <button type="submit" class="btn btn-success">Create</button>
+
+</EditForm>*@
+<EditForm Model="@category" OnValidSubmit="Create">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="First name" HelperText="Max. 20 characters"
+                                  @bind-Value="category.Name"  />
+                    @if (message != "")
+                    {
+                 
+                        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" ShowCloseIcon="true" CloseIconClicked="(()=>closeiconclicked(true))">@message</MudAlert>
+                    }
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Create Category</MudButton>
+                </MudCardActions>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" @onclick="printcat">Print Categories</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+   
+    </MudGrid>
+</EditForm>
+
+@if (showalertcreate)
+{
+    <MudAlert Severity="Severity.Success" Variant="Variant.Filled"ShowCloseIcon="true" CloseIconClicked="(()=>closeiconclicked(true))">The Category Added Successfully</MudAlert>
+}
+<div id="printarea">
+@if (Categories!=null)
+{ 
+<MudTable Items="@Categories" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<Category,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Periodic Elements</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+            <MudTh>Update</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Update">  <a href="/updatecat/@context.Id" class="btn btn-dark">Update</a></MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="d-flex flex-wrap mt-4">
+    <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+    <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+    <MudSpacer />
+    <div style="min-width:200px;">
+        <MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.Name</MudText>
+    </div>
+</div>
+}
+else
+{
+    <p>loading.........</p>
+
+}
+</div>

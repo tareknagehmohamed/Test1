@@ -1,0 +1,119 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localst
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Test1</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+       <img src="@imgpath" style="width:50px;border-radius:50%"/>
+        </div>
+        <div class="nav-item px-3">
+
+            <span style="color:red">@username</span>
+
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="ratingstar" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Rating
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="fetchdata">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="showallcategory">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> show all category
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="newsshow">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Add New
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="showallnews">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>show all news
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="search">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> search
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="sendgmail">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>  sendgmail
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="gmailsend">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>gmail send
+            </NavLink>
+        </div>
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="googlemappage">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>google map page
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="Showjoin">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>Show Join
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="showgroupby">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>show groupby
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="showskiptake">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>show skip take
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="searchbyname">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>Search 
+            </NavLink>
+        </div>
+    
+        
+    </nav>
+</div>
+
+@code {
+    public string imgpath = "";
+    public string username = "";
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        imgpath = await localst.GetItemAsync<string>("imgselogin");
+        username = await localst.GetItemAsync<string>("userselogin");
+    }
+}

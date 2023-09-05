@@ -1,0 +1,6 @@
+﻿@page "/sessionpage"
+@inject Blazored.LocalStorage.ILocalStorageService localst
+<h3>Sessionpage</h3>
+<input @bind-value="@res" />
+<button class="btn btn-dark" @onclick="sessionres">Add Session</button>
+

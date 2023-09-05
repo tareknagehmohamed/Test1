@@ -1,0 +1,88 @@
+﻿@page "/newsshow"
+
+@*<EditForm Model="imagedto" OnValidSubmit="Create">
+    <InputText id="Name" @bind-Value="imagedto.Name"></InputText>
+    <InputText id="address" @bind-Value="imagedto.address"></InputText>
+    <InputSelect id="categoryId" @bind-Value="imagedto.categoryId">
+        <option value=0>---Select One Category---</option>
+        @foreach (var item in Categories)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    
+   </InputSelect>
+    <InputFile OnChange="@Onfileselection"></InputFile>*@
+   @* <img src="@imgurl" style="width:150px" />*@
+@*    <button type="submit" class="btn btn-success" > Add News</button>
+</EditForm>*@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Add New</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="logincss/css/style.css">
+
+</head>
+<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Add New</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="fa fa-user-o"></span>
+						</div>
+					<h3 class="text-center mb-4">Add new New</h3>
+						<EditForm Model="imagedto" class="login-form">
+							<DataAnnotationsValidator></DataAnnotationsValidator>
+							<div class="form-group">
+								<InputText id="Name" @bind-Value="imagedto.Name" class="form-control rounded-left" placeholder="Name"></InputText>
+								<ValidationMessage For="@(()=>imagedto.Name)"></ValidationMessage>
+							</div>
+							<div class="form-group d-flex">
+								<InputText id="address" @bind-Value="imagedto.address" class="form-control rounded-left" placeholder="Address"></InputText>
+								<ValidationMessage For="@(()=>imagedto.address)"></ValidationMessage>
+							</div>
+							<div class="form-group">
+							<InputSelect id="categoryId" @bind-Value="imagedto.categoryId">
+								<option value=0>---Select One Category---</option>
+								@foreach (var item in Categories)
+								{
+									<option value="@item.Id">@item.Name</option>
+								}
+
+							</InputSelect>
+							</div>
+								<div class="form-group">
+							<InputFile OnChange="@Onfileselection"></InputFile>
+							</div>
+							<div class="form-group">
+								<button type="submit" @onclick="Create" class="btn btn-success">Add News</button>
+							</div>
+				
+						</EditForm>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+</body>
+</html>
+
+
+

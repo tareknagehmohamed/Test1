@@ -1,0 +1,45 @@
+﻿@page "/sendgmail"
+@using System.Net.Mail;
+<h3>Sendgmail</h3>
+<button class="btn btn-success" @onclick="Sendmail">Send Mail</button>
+<span style="color:red">@message</span>
+@code {
+    private string message { get; set; } = "";
+    [CascadingParameter]
+    public EventCallback enotify { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await enotify.InvokeAsync();
+        }
+
+    }
+    private void Sendmail()
+    {
+        try
+        {
+            using (MailMessage mail=new MailMessage())
+            {
+                mail.From = new MailAddress("wmam158@gmail.com");
+                mail.To.Add("wmam158@gmail.com");
+                mail.Subject = "alsalam alikom tarek nageh";
+                mail.Body = "<h1>alsalam alikom tarek nageh alsalam alikom tarek nageh alsalam alikom tarek nageh alsalam alikom tarek nageh</h1>";
+                mail.IsBodyHtml = true;
+                using(SmtpClient smtp =new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new System.Net.NetworkCredential("wmam158@gmail.com","tar01273444382");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                    message = "Send Successfully";                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+
+            message = ex.Message;
+        }
+
+    }
+}

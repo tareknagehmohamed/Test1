@@ -1,0 +1,50 @@
+﻿@page "/ratingstar"
+@*<h1>@date</h1>*@
+<EditForm Model="@rating" OnValidSubmit="Create">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="First name" HelperText="Max. 20 characters"
+                                  @bind-Value="rating.Name" />
+           
+                </MudCardContent>
+
+                <MudDatePicker Label="Basic example" @bind-Date="rating.datetimerating"  />
+                <MudCardContent>
+                  @*  <MudTextField Label="Rating" HelperText="Max. 20 characters"
+                                  @bind-Value="rating.ratingstar" />*@
+                    <MudRating Size="@Size.Large" @bind-SelectedValue="rating.ratingstar"  />
+                </MudCardContent>
+         @*       <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Create Rating</MudButton>
+                </MudCardActions>*@
+                <MudTooltip Text="Add">
+                    <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Secondary" ButtonType="ButtonType.Submit"/>
+                </MudTooltip>
+            </MudCard>
+        </MudItem>
+
+    </MudGrid>
+</EditForm>
+@*<h1>@msg</h1>*@
+@if (showalertcreate)
+{
+    <MudAlert Severity="Severity.Success" Variant="Variant.Filled" ShowCloseIcon="true" CloseIconClicked="(()=>closeiconclicked(true))">The Rating Added Successfully</MudAlert>
+}
+<MudDataGrid Items="@ratings" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+    <Columns>
+        <PropertyColumn  Property="x => x.Name" />
+        <PropertyColumn  Property="x => x.datetimerating.ToString()" />
+      
+        <TemplateColumn CellClass="d-flex justify-end">
+            <CellTemplate>
+                <MudStack Row>
+                    <MudRating Size="@Size.Small" SelectedValue="@context.Item.ratingstar" ReadOnly="true" />
+                  
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>

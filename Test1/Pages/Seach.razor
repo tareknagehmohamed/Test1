@@ -1,0 +1,127 @@
+﻿@page "/search"
+@inject Blazored.LocalStorage.ILocalStorageService localst
+@using Blazored.Typeahead
+
+@*<BlazoredTypeahead SearchMethod="Searchbyname" @bind-Value="newsob">
+    <SelectedTemplate>@newsob.Name</SelectedTemplate>
+  
+    <ResultTemplate><p style="color:red"> @newsob.Name</p></ResultTemplate>
+ <NotFoundTemplate>Not Found Templete !</NotFoundTemplate>
+</BlazoredTypeahead>*@
+<BlazoredTypeahead SearchMethod="Searchbyname" @bind-Value="newsob">
+    <SelectedTemplate>@context.Name</SelectedTemplate>
+   
+    <ResultTemplate><b>@context.Name</b>-@context.address-<img src="@context.imgpath" style="width:30px" /></ResultTemplate>
+    <NotFoundTemplate>Not Found Templete !</NotFoundTemplate>
+</BlazoredTypeahead>
+@if (newsob != null)
+{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+        @if (show)
+        {
+    <div class="container">
+        <h2>Card Image</h2>
+        <p>@newsob.Name</p>
+        <div class="card" style="width:400px">
+            <img class="card-img-top" src="@newsob.imgpath" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">John Doe</h4>
+                <p class="card-text">@newsob.address</p>
+               
+                <button @onclick="(()=>Goto(newsob.Id))" class="btn btn-primary">Go To Details</button>
+                  
+            </div>
+        </div>
+
+
+    </div>
+        }
+</body>
+</html>
+}
+    else
+    {
+<p>.....waiting loading.......</p>
+    }
+
+
+@*
+
+    @if (newsob != null)
+    {
+    <b>@newsob.Name</b>
+    <b>  @newsob.address</b>
+
+        <img src="@newsob.imgpath" style="width:100px" />
+       <input type="text" @bind="newsob.Name" id="Name" />
+       @if (show)
+    {
+
+        <button @onclick="(()=>Goto(newsob.Id))" class="btn btn-success">Go</button>
+    }
+  
+    }
+    else
+    {
+        <p>.....waiting loading.......</p>
+    }*@
+
+
+@if (newssearch != null)
+{
+    <table>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>Address</td>
+            <td>CategoryId</td>
+            <td>Category Name</td>
+            <td>Image</td>
+            <td>Delete</td>
+        </tr>
+        @foreach (var item in newssearch)
+        {
+
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.address
+                </td>
+                <td>
+                    @item.categoryId
+                </td>
+                <td>
+                    @item.category.Name
+                </td>
+                <td>
+                    <img src="@item.imgpath" style="width:150px">
+                </td>
+     
+
+            </tr>
+
+
+
+        }
+    </table>
+}
+else
+{
+    <p>loading.........</p>
+
+}
+
+
+

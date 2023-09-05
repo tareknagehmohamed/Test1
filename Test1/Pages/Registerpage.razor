@@ -1,0 +1,24 @@
+﻿@page "/register"
+
+@if (Message!=null)
+{
+    <p>@Message</p>
+}
+<EditForm Model="Registerlogin" OnValidSubmit="Create">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    <InputText id="username" @bind-Value="Registerlogin.username"></InputText>
+    <ValidationMessage For="@(()=>Registerlogin.username)"></ValidationMessage>
+    <InputText id="Name" @bind-Value="Registerlogin.Name"></InputText>
+    <ValidationMessage For="@(()=>Registerlogin.Name)"></ValidationMessage>
+    <InputText id="Password" @bind-Value="Registerlogin.Password"></InputText>
+    <ValidationMessage For="@(()=>Registerlogin.Password)"></ValidationMessage>
+    <InputText id="Email" @bind-Value="Registerlogin.Email"></InputText>
+    <ValidationMessage For="@(()=>Registerlogin.Email)"></ValidationMessage>
+    <InputFile OnChange="@Onfileselection"></InputFile>
+    @* <img src="@imgurl" style="width:150px" />*@
+   <button type="submit" class="btn btn-success">Register</button>
+    <a href="/loginpage" class="btn btn-dark">Login Now</a>
+</EditForm>
+
+

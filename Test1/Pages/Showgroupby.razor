@@ -1,0 +1,49 @@
+﻿@page "/showgroupby"
+
+@*<h3>Showgroupby</h3>
+<h1>@catname</h1>
+<h1>@count</h1>
+<h1>@sum</h1>
+<h1>@avg</h1>*@
+@if (Groupclasses != null)
+{
+    <table>
+        <tr>
+         
+            <td>Category Name</td>
+            <td>Count</td>
+            <td>Sum</td>
+            <td>Average</td>
+
+        </tr>
+        @foreach (var item in Groupclasses)
+        {
+
+            <tr>
+          
+                <td>
+                    @item.Categoryname
+                </td>
+                <td>
+                    @item.Count
+                </td>
+                <td>
+                    @item.Sum
+                </td>
+                <td>
+                    @item.Average
+                </td>
+           
+
+            </tr>
+
+
+
+        }
+    </table>
+}
+else
+{
+    <p>loading.........</p>
+
+}

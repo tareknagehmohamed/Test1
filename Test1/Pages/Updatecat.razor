@@ -1,0 +1,8 @@
+﻿@page "/updatecat/{id}"
+<h3>Updatecat</h3>
+
+<EditForm Model="category" OnValidSubmit="Update">
+    <InputText id="Name" @bind-Value="category.Name"></InputText>
+    <button type="submit" class="btn btn-success">Update</button>
+   
+</EditForm>

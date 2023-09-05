@@ -1,0 +1,22 @@
+﻿@page "/updatenews/{id}"
+
+<EditForm Model="newsob" OnValidSubmit="Update">
+    <InputText id="Name" @bind-Value="newsob.Name"></InputText>
+    <InputText id="Name" @bind-Value="newsob.address"></InputText>
+   @* <InputNumber id="categoryId" @bind-Value="newsob.categoryId"></InputNumber>*@
+    <InputSelect id="categoryId" @bind-Value="newsob.categoryId" >
+      @*  <option value=0>---Select One Category---</option>*@
+        @foreach (var item in Categories)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+
+    </InputSelect>
+    <InputFile OnChange="@Onfileselection"></InputFile>
+    <img src="@imgurl" style="width:150px" />
+    <img src="@newsob.imgpath" style="width:150px" />
+   @* <button type="submit" class="btn btn-success">Update</button>*@
+  <MudIconButton Icon="@Icons.Material.Filled.Update" ButtonType="ButtonType.Submit"  Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" />
+</EditForm>
+
+

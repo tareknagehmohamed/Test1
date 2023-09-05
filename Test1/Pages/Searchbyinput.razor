@@ -1,0 +1,32 @@
+﻿@page "/searchbyinput"
+@inject Blazored.LocalStorage.ILocalStorageService localst
+
+@*<p>@Namenews</p><p>@addressnews</p><img src="@imgnews" style="width:150px" />*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+ 
+<div class="container">
+  <h2>Card Image</h2>
+        <p>@Namenews</p>
+  <div class="card" style="width:400px">
+            <img class="card-img-top" src="@imgnews" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">John Doe</h4>
+      <p class="card-text">@addressnews</p>
+     
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>

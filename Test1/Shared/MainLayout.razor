@@ -1,0 +1,58 @@
+﻿@inherits LayoutComponentBase
+@inject Blazored.LocalStorage.ILocalStorageService localst
+@inject NavigationManager nav
+<PageTitle>Test1</PageTitle>
+
+<div class="page">
+    @if (islogin)
+    {
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+    }
+
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+        @if (islogin)
+        {
+            <a href="loginpage" @onclick="logout" style="align-items:center" class="btn btn-danger">Logout</a>
+        }
+        <article class="content px-4">
+            <CascadingValue Value="enotify">
+                @Body
+            </CascadingValue>
+          
+        </article>
+    </main>
+</div>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+@code{
+    public bool islogin  = false;
+    public EventCallback enotify => EventCallback.Factory.Create(this, checknotify);
+    public async Task logout()
+    {
+        await localst.ClearAsync();
+        await checknotify();
+        nav.NavigateTo("loginpage");
+
+    }
+    public async Task checknotify()
+    {
+        var res =await localst.GetItemAsync<string>("emailselogin");
+        if (res!=null)
+        {
+            islogin = true;
+        }
+        else
+        {
+            islogin = false;
+            nav.NavigateTo("loginpage");
+        }
+
+    }
+}

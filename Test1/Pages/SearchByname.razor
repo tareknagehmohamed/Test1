@@ -1,0 +1,65 @@
+﻿@page "/searchbyname"
+<table>
+    <tr>
+        <td>
+
+            <EditForm Model="newsob">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <InputText id="" @bind-Value="newsob.Name"></InputText>
+                <ValidationMessage For="@(()=>newsob.Name)"></ValidationMessage>
+                <button type="submit" class="btn btn-primary" @onclick="(()=>Search(newsob.Name))"> Search</button>
+
+            </EditForm>
+        </td>
+        <td>
+            <button class="btn btn-primary" @onclick="showall">Show All</button>
+        </td>
+    </tr>
+</table>
+
+
+@if (news != null)
+{
+    <table>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>Address</td>
+            <td>CategoryId</td>
+            <td>Category Name</td>
+            <td>Image</td>
+            <td>Delete</td>
+        </tr>
+        @foreach (var item in news)
+        {
+
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                   @item.address
+                </td>
+                <td>
+                   @item.categoryId
+                </td>
+                <td>
+                    @item.category.Name
+                </td>
+                <td>
+                    <img src="@item.imgpath" style="width:150px">
+                </td>
+
+                </tr>
+
+
+
+        }
+    </table>
+}
+else
+{
+    <p>loading.........</p>
+
+}

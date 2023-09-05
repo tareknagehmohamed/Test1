@@ -1,0 +1,72 @@
+﻿
+@page "/showskiptake"
+
+@if (News != null)
+{
+@*    <h1>@count</h1>*@
+    <table>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>Address</td>
+            <td>CategoryId</td>
+            <td>Category Name</td>
+            <td>Image</td>
+
+        </tr>
+        <tr>
+            <td colspan="4">
+                <center>
+                @if (msg!="")
+                {
+                    <span class="alert alert-danger">@msg</span>
+                }
+                </center>
+            </td>
+        </tr>
+        @foreach (var item in News)
+        {
+
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.address
+                </td>
+                <td>
+                    @item.categoryId
+                </td>
+                <td>
+                    @item.category.Name
+                </td>
+                <td>
+                    <img src="@item.imgpath" style="width:150px">
+                </td>
+
+            </tr>
+
+
+
+        }
+
+    </table>
+    @if (visiblebuttonnext)
+    {
+        <a href="#" @onclick:preventDefault @onclick="Nextpage" class="previous round">&#8249;</a>
+        @*    <button @onclick="Nextpage" class="btn btn-success">Next Bage</button>*@
+    }
+    @if (visiblebuttonback)
+    {
+        <a href="#" @onclick:preventDefault @onclick="Backpage" class="next round">&#8250;</a>
+        @* <button @onclick="Backpage" class="btn btn-success">Back Bage</button>*@
+    }
+}
+else
+{
+    <p>loading.........</p>
+
+}
+
+

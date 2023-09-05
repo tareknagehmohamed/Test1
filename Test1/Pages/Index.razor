@@ -1,0 +1,57 @@
+﻿@page "/"
+@inject IJSRuntime js
+@inject NavigationManager  nav
+@inject Blazored.LocalStorage.ILocalStorageService localst
+<PageTitle>Index</PageTitle>
+
+@*<h1>Hello, world!</h1>
+<p>@res</p>
+<p>@email</p>
+<p>@name</p>
+<p>@username</p>
+<img src="@imgpath" style="width:150px" />*@
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+@*<a href="/showallcategory" class="btn btn-dark">Show all Categories</a>
+<a href="/newsshow" class="btn btn-dark">Add News</a>
+<a href="/showallnews" class="btn btn-dark">Show News</a>
+<a href="/search" class="btn btn-dark">Search News</a>
+<a href="/sessionpage" class="btn btn-dark">Add Session</a>
+<a href="/sendgmail" class="btn btn-dark">Send gmail</a>
+<a href="/googlemappage" class="btn btn-dark">Google Map </a>
+<a href="/register" class="btn btn-dark">Register Now </a>*@
+
+@*<button type="button" @onclick="res" class="btn btn-dark">Show News</button>*@
+@code{
+    [CascadingParameter]
+    public EventCallback enotify { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await enotify.InvokeAsync();
+        }
+
+    }
+    public string res = "";
+    public string email = "";
+    public string username = "";
+    public string name = "";
+    public string imgpath = "";
+    //public async void res()
+    //{
+    //    await js.InvokeAsync<object>("open", new object[] { "/showallnews", "_blank" });
+    //    nav.NavigateTo("showallnews");
+    //}
+    protected async override Task OnInitializedAsync()
+    {
+        res= await localst.GetItemAsync<string>("mysession");
+        email = await localst.GetItemAsync<string>("emailselogin");
+        username = await localst.GetItemAsync<string>("userselogin");
+        name = await localst.GetItemAsync<string>("nameselogin");
+        imgpath = await localst.GetItemAsync<string>("imgselogin");
+        
+    }
+
+}

@@ -1,0 +1,26 @@
+﻿@page "/googlemappage"
+@inject IJSRuntime jsrun
+<style>
+
+</style>
+
+<div id="map" style="height:90vh;width:100%;"></div>
+@code {
+    [CascadingParameter]
+    public EventCallback enotify { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await enotify.InvokeAsync();
+        }
+
+    }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await enotify.InvokeAsync();
+    //    }
+    //}
+}
